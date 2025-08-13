@@ -1,11 +1,11 @@
-defmodule HelloWorld.MixProject do
+defmodule Learn.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :hello_world,
+      app: :learn,
       version: "0.1.0",
-      # elixir: "~> 1.8",
+      elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]

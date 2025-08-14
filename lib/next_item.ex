@@ -10,13 +10,7 @@ defmodule NextBigThing do
   next_item(["Joe" "Bob" "Sally"], "Bob") #=> "Sally"
   ```
   """
-  def next_item(list, item) do
-    case Enum.find_index(list, fn element -> element == item end) do
-      nil ->
-        nil
-
-      index ->
-        Enum.at(list, index + 1)
-    end
-  end
+  def next_item([], _item), do: nil
+  def next_item([item, next | _rest], item), do: next
+  def next_item([_any | rest], item), do: next_item(rest, item)
 end

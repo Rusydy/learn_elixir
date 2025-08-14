@@ -1,5 +1,5 @@
 defmodule TotalPoints do
-  @docs """
+  @doc """
   Our football team has finished the championship.
 
   Our team's match results are recorded in a collection of strings. Each match is represented by a string in the format "x:y", where x is our team's score and y is our opponents score.
@@ -23,21 +23,17 @@ defmodule TotalPoints do
   """
   def points(games) do
     games
-    |> Enum.map(fn game ->
-      [x, y] = String.split(game, ":")
-      # Next, we'll convert these strings to numbers and calculate points
-      x_score = String.to_integer(x)
-      y_score = String.to_integer(y)
-
-      cond do
-        x_score > y_score ->
-          3
-        x_score == y_score ->
-          1
-        true ->
-          0
-      end
-    end)
+    |> Enum.map(&String.split(&1, ":"))
+    |> Enum.map(&to_integers/1)
+    |> Enum.map(&score/1)
     |> Enum.sum()
+  end
+
+  defp score([x, y]) when x > y, do: 3
+  defp score([x, y]) when x < y, do: 0
+  defp score([x, y]) when x == y, do: 1
+
+  defp to_integers(list) do
+    Enum.map(list, &String.to_integer/1)
   end
 end

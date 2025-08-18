@@ -1,18 +1,13 @@
 defmodule Learn do
-  @moduledoc """
-  Documentation for `Learn`.
-  """
+  use Application
+  alias UUID
 
-  @doc """
-  Hello world.
+  def start(_type, _args) do
+    Learn.main()
+    Supervisor.start_link([], strategy: :one_for_one)
+  end
 
-  ## Examples
-
-      iex> Learn.hello()
-      :world
-
-  """
-  def hello do
+  def main do
     :world
   end
 end
